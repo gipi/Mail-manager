@@ -1,0 +1,5 @@
+user            = mailuser
+password        = mailpassword
+dbname          = maildb
+#hosts          = /var/run/postgresql
+query           = SELECT domain FROM users WHERE domain='%s'

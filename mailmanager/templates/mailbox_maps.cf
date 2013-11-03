@@ -1,0 +1,5 @@
+user = mailuser
+password = mailpassword                                                                                                                                      
+hosts = localhost
+dbname = maildb
+query = SELECT home FROM users WHERE userid=split_part('%s', '@', 1) and domain=split_part('%s', '@', 2);
