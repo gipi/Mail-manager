@@ -1,7 +1,9 @@
 import os
+import sys
 import string
 import base64
 from hashlib import sha256
+
 
 class BaseCommand(object):
     need_database = False
@@ -28,3 +30,7 @@ class BaseCommand(object):
 
     def __call__(self, *args):
         self.handle(*args)
+
+    def error(self, msg, status_code=1):
+        print >> sys.stderr, msg
+        sys.exit(1)
