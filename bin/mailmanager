@@ -6,7 +6,6 @@ A little python script to manage your mail server (Postfix + PostgreSQL).
 Usage:
     mailmanager (-h | --help)
     mailmanager init --db-user=username --db-passwd=password
-    mailmanager configure-postfix --dbuser <username> --dbpassword <password>
     mailmanager list
     mailmanager create-email <email> <password>
 
@@ -32,7 +31,6 @@ env = Environment(loader=FileSystemLoader(
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='Mail Manager 0.1')
-    print(arguments)
 
     # here we are sure that the commands are the available ones
     module_name = sys.argv[1]
@@ -51,16 +49,3 @@ if __name__ == "__main__":
         ]
 
     command_instance(*args)
-
-    sys.exit(1)
-
-    commandname = sys.argv[1]
-    nargs = len(sys.argv)
-
-    """
-    if commandname == "list":
-    elif commandname == "config-postfix":
-        template = env.get_template('main.cf')
-        print template.render()
-    elif commandname == "create" and nargs == 4:
-    """
