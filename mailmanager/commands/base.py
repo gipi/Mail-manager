@@ -3,6 +3,7 @@ import sys
 import string
 import base64
 from hashlib import sha256
+from jinja2 import Environment, FileSystemLoader
 
 
 class BaseCommand(object):
@@ -10,6 +11,12 @@ class BaseCommand(object):
 
     # lines below from https://bitbucket.org/tarek/bugbro/src/b042d7640067/bugbro/util.py
     _SALT_LEN = 8
+
+    def __init__(self):
+        self.env = Environment(
+            loader=FileSystemLoader(
+                os.path.abspath(
+                    os.path.join(os.path.dirname(__file__), '..', 'templates'))))
 
 
     def _get_configuration_dir_path(self):
@@ -26,6 +33,20 @@ class BaseCommand(object):
 
     def _get_configuration_file(self):
         return open(self._get_configuration_file_path(), 'rw')
+
+    def get_configuration_params(self):
+        """Read from the configuration file and return a dict"""
+        with self._get_configuration_file() as configuration:
+            params = {}
+            for line in configuration.readlines():
+                param_name, param_value = line.strip('\r\n').split('=')
+                params[param_name] = param_value
+
+            return params
+
+    def render_template(self, template_name, params):
+        return self.env.get_template(template_name).render(params)
+
     def randchar(self, chars=string.digits + string.letters):
         pos = int(float(ord(os.urandom(1))) * 256. / 255.)
         return chars[pos % len(chars)]

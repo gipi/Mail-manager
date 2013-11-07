@@ -16,7 +16,6 @@ Options:
 import sys
 import os
 import importlib
-from jinja2 import Environment, FileSystemLoader
 from docopt import docopt
 
 COMMANDS = (
@@ -24,9 +23,6 @@ COMMANDS = (
     'init',
 )
 
-env = Environment(loader=FileSystemLoader(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates'))
-))
 
 
 if __name__ == "__main__":
