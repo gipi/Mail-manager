@@ -6,6 +6,7 @@ A little python script to manage your mail server (Postfix + PostgreSQL).
 Usage:
     mailmanager (-h | --help)
     mailmanager init --db-user=username --db-passwd=password
+    mailmanager dovecot
     mailmanager list
     mailmanager create-email <email> <password>
 
@@ -21,6 +22,7 @@ from docopt import docopt
 COMMANDS = (
     'list',
     'init',
+    'dovecot',
 )
 
 
@@ -38,10 +40,13 @@ if __name__ == "__main__":
 
     command_instance = command_module.Command()
 
+    args = []
     if module_name == 'init':
         args = [
             arguments['--db-user'],
             arguments['--db-passwd'],
         ]
+    elif module_name == 'dovecot':
+        pass
 
     command_instance(*args)
