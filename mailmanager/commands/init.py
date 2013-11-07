@@ -4,21 +4,6 @@ from .base import BaseCommand
 
 class Command(BaseCommand):
 
-    def _get_configuration_dir_path(self):
-        return os.path.expanduser('~/.mailmanager/')
-
-    def _get_configuration_file_path(self):
-        return os.path.abspath(os.path.join(self._get_configuration_dir_path(), 'mm.rc'))
-
-    def _create_configuration_dir(self):
-        try:
-            os.mkdir(self._get_configuration_dir_path())
-        except OSError:
-            pass
-
-    def _get_configuration_file(self):
-        return open(self._get_configuration_file_path(), 'w')
-
     def _write_configuration_to_file(self, username, password):
         if os.path.exists(self._get_configuration_file_path()):
            self.error(

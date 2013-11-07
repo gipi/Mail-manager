@@ -11,6 +11,21 @@ class BaseCommand(object):
     # lines below from https://bitbucket.org/tarek/bugbro/src/b042d7640067/bugbro/util.py
     _SALT_LEN = 8
 
+
+    def _get_configuration_dir_path(self):
+        return os.path.expanduser('~/.mailmanager/')
+
+    def _get_configuration_file_path(self):
+        return os.path.abspath(os.path.join(self._get_configuration_dir_path(), 'mm.rc'))
+
+    def _create_configuration_dir(self):
+        try:
+            os.mkdir(self._get_configuration_dir_path())
+        except OSError:
+            pass
+
+    def _get_configuration_file(self):
+        return open(self._get_configuration_file_path(), 'rw')
     def randchar(self, chars=string.digits + string.letters):
         pos = int(float(ord(os.urandom(1))) * 256. / 255.)
         return chars[pos % len(chars)]
