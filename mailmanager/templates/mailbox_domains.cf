@@ -1,5 +1,5 @@
-user            = mailuser
-password        = mailpassword
-dbname          = maildb
+user            = {{ username }}
+password        = {{ password }}
+dbname          = {{ dbname }}
 #hosts          = /var/run/postgresql
-query           = SELECT domain FROM users WHERE domain='%s'
+query           = SELECT domain FROM {{ tablename }} WHERE domain='%s'
