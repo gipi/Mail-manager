@@ -31,8 +31,8 @@ class BaseCommand(object):
         except OSError:
             pass
 
-    def _get_configuration_file(self):
-        return open(self._get_configuration_file_path(), 'rw')
+    def _get_configuration_file(self, mode='r'):
+        return open(self._get_configuration_file_path(), mode)
 
     def get_configuration_params(self):
         """Read from the configuration file and return a dict"""
