@@ -21,6 +21,21 @@ password=%s
 dbname=%s
 tablename=%s''' % (username, password, dbname, tablename))
 
+    def next_step(self, **params):
+        params['configuration_file_path'] = self._get_configuration_file_path()
+        return '''
+Configuration file successfully created at
+
+    %(configuration_file_path)s
+
+You can now create the database and the user with the following commands
+
+ # su postgres
+ $ createuser -U postgres %(username)s --no-superuser --no-createdb --no-createrole
+ $ psql -U postgres -c "alter role %(username)s with password '%(password)s';"
+ $ createdb -U postgres -O %(username)s %(dbname)s
+''' % params
+
     #TODO: hash password also in the config file
     def handle(self, *args):
         username = args[0]
@@ -31,3 +46,5 @@ tablename=%s''' % (username, password, dbname, tablename))
         self._create_configuration_dir()
 
         self._write_configuration_to_file(username, password, dbname, tablename)
+
+        print self.next_step(**{'username': username, 'password': password, 'dbname': dbname, 'tablename': tablename})
