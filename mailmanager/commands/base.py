@@ -38,9 +38,19 @@ class BaseCommand(object):
         """Read from the configuration file and return a dict"""
         with self._get_configuration_file() as configuration:
             params = {}
+            nline = 0
             for line in configuration.readlines():
-                param_name, param_value = line.strip('\r\n').split('=')
-                params[param_name] = param_value
+                nline += 1
+                if line.startswith('#') or line.startswith('\n'):
+                    continue
+                try:
+                    param_name, param_value = line.strip('\r\n').split('=')
+                    params[param_name] = param_value
+                except Exception as e:
+                    print >> sys.stderr, "error at line '%d': '%s' '%s'" % (
+                        nline, line, e
+                    )
+                    sys.exit(1)
 
             return params
 
