@@ -1,5 +1,5 @@
-user = mailuser
-password = mailpassword                                                                                                                                      
+user = {{ username }}
+password = {{ password }}
 hosts = localhost
-dbname = maildb
-query = SELECT home FROM users WHERE userid=split_part('%s', '@', 1) and domain=split_part('%s', '@', 2);
+dbname = {{ dbname }}
+query = SELECT home FROM {{ tablename }} WHERE userid=split_part('%s', '@', 1) and domain=split_part('%s', '@', 2);

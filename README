@@ -8,6 +8,7 @@ THIS IS NOT READY FOR PRODUCTION!!! YOUR SERVER WILL BLOW UP!!!
  $ mailmanager init --username userdb \
     --dbname maildb --passwd dbpasswd \
     --sql | sudo -u postgres -s psql
+ # mailmanager conf | tar xf - -C /
 
 this last command save in the .mailmanager/ directory a
 configuration file with the credentials useful to connect
