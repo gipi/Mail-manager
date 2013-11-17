@@ -9,7 +9,7 @@ apt-get update
 # remove hostname that make postfix goes crazy
 sed -i '/debian-7.2.0/d' /etc/hosts
 DEBIAN_FRONTEND=noninteractive apt-get install -y python-dev python-setuptools postgresql libpq-dev postfix
-cd /root/mail-manager && python setup.py install
+cd /root/mail-manager && python setup.py develop
 EOF
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
