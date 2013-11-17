@@ -22,6 +22,7 @@ class Command(BaseCommand):
         /etc/postfix/main.cf
     """
     def build_tarinfo(self, filepath, content):
+        # FIXME: take file permission into account
         info = tarfile.TarInfo(filepath)
         fobject = StringIO.StringIO(content)
         info.size = len(fobject.buf)
