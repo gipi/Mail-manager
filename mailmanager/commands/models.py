@@ -2,10 +2,10 @@ from peewee import *
 import psycopg2
 import sys
 
-database = None
+database = PostgresqlDatabase(None)
 
 def init_db(username, password, dbname):
-    database = PostgresqlDatabase(dbname, **{
+    database.init(dbname, **{
         'host': 'localhost',
         'user': username,
         'password': password,
