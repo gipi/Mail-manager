@@ -8,8 +8,7 @@ Usage:
     mailmanager init --db-name=dbname --table-name=tablename --db-user=username --db-passwd=password
     mailmanager conf
     mailmanager dovecot
-    mailmanager list
-    mailmanager create-email <email> <password>
+    mailmanager email (list | add | disable | renable | remove) [OPTIONS...]
     mailmanager help <command>
 
 Options:
@@ -26,6 +25,7 @@ COMMANDS = (
     'init',
     'conf',
     'dovecot',
+    'email',
     'help',
 )
 
@@ -63,4 +63,4 @@ if __name__ == "__main__":
     elif module_name == 'dovecot':
         pass
 
-    command_instance(*args)
+    command_instance(*args, **arguments)

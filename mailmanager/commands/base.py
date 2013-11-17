@@ -81,8 +81,8 @@ class BaseCommand(object):
         return "%s" % ssha
 
 
-    def __call__(self, *args):
-        self.handle(*args)
+    def __call__(self, *args, **kwargs):
+        self.handle(*args, **kwargs)
 
     def error(self, msg, status_code=1):
         print >> sys.stderr, msg

@@ -29,7 +29,7 @@ class Command(BaseCommand):
 
         return {'tarinfo': info, 'fileobj': fobject}
 
-    def handle(self, *args):
+    def handle(self, *args, **kwargs):
         if sys.stdout.isatty():
             self.error('a tty has been detected, probably you want to pipe this to \'tar xf - -C /your/path/\'')
 
