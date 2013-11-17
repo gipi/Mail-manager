@@ -30,10 +30,10 @@ class BaseModel(Model):
 
 class Users(BaseModel):
     domain   = CharField()
-    gid      = IntegerField()
+    gid      = IntegerField(default=8)
     home     = CharField()  
     password = CharField()
-    uid      = IntegerField()
+    uid      = IntegerField(default=8)
     userid   = CharField()
 
     class Meta:
