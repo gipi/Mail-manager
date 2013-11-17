@@ -12,7 +12,15 @@ class Command(BaseCommand):
     If the command find that the stdout is a tty, then alerts the user; the
     intended usage is to pipe with the tar command like
 
-      $ mailmanager conf | tar xf - -C /"""
+      $ mailmanager conf | tar xf - -C /
+    
+    You can also see the difference between the installed files and the generated
+    ones using command
+
+     # diff -Nur \
+        <(mailmanager conf | tar -f - -x /etc/postfix/main.cf -O ) \
+        /etc/postfix/main.cf
+    """
     def build_tarinfo(self, filepath, content):
         info = tarfile.TarInfo(filepath)
         fobject = StringIO.StringIO(content)
