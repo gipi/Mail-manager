@@ -3,16 +3,29 @@ THIS IS NOT READY FOR PRODUCTION!!! YOUR SERVER WILL BLOW UP!!!
 
 ## INSTALLATION
 
- $ pip install peewee psycopg2 jinja2 docopt
- $ python setup.py install
- $ mailmanager init --username userdb \
-    --dbname maildb --passwd dbpasswd \
-    --sql | sudo -u postgres -s psql
- # mailmanager conf | tar xf - -C /
+ $ python setup.py install# soon a deb package
+ $ mailmanager init --db-user userdb \
+    --db-name maildb --db-passwd dbpasswd
 
 this last command save in the .mailmanager/ directory a
 configuration file with the credentials useful to connect
 to the mail database.
+
+It'a also possible to generate the configuration files
+
+ # mailmanager conf | tar xf - -C /
+
+## COFIGURATION
+
+The configuration file is created with the ``init`` command and
+should contain the following variable
+
+    username
+    password
+    dbname
+    tablename
+
+that will be passed to the requested template when rendered.
 
 ## TEST
 
