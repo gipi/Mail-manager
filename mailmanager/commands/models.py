@@ -19,6 +19,9 @@ def init_db():
         print e.message
         sys.exit(1)
 
+def create_table():
+    Users.create_table()
+
 init_db()
 
 class UnknownFieldType(object):
