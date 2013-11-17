@@ -10,6 +10,7 @@ Usage:
     mailmanager dovecot
     mailmanager list
     mailmanager create-email <email> <password>
+    mailmanager help <command>
 
 Options:
     -h --help   Show this screen.
@@ -25,6 +26,7 @@ COMMANDS = (
     'init',
     'conf',
     'dovecot',
+    'help',
 )
 
 
@@ -38,9 +40,17 @@ if __name__ == "__main__":
     if not module_name in COMMANDS:
         sys.exit(1)
 
+    if module_name == 'help':
+        module_name = sys.argv[2]
+
     command_module = importlib.import_module('mailmanager.commands.%s' % module_name)
 
     command_instance = command_module.Command()
+
+    # if the help command is called then read the docstring
+    if arguments['help']:
+        print command_instance.__doc__
+        exit(0)
 
     args = []
     if module_name == 'init':

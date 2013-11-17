@@ -5,9 +5,14 @@ import StringIO
 
 
 class Command(BaseCommand):
-    """Print out a tar archive containing all the configuration file
-    needed for your system.
     """
+    Print out a tar archive containing all the configuration file
+    needed for your system.
+
+    If the command find that the stdout is a tty, then alerts the user; the
+    intended usage is to pipe with the tar command like
+
+      $ mailmanager conf | tar xf - -C /"""
     def build_tarinfo(self, filepath, content):
         info = tarfile.TarInfo(filepath)
         fobject = StringIO.StringIO(content)
