@@ -4,11 +4,8 @@ import sys
 
 database = None
 
-def init_db():
-    username = raw_input('username ? ')
-    password = raw_input('password? ')
-
-    database = PostgresqlDatabase('maildb', **{
+def init_db(username, password, dbname):
+    database = PostgresqlDatabase(dbname, **{
         'host': 'localhost',
         'user': username,
         'password': password,
@@ -22,7 +19,6 @@ def init_db():
 def create_table():
     Users.create_table()
 
-init_db()
 
 class UnknownFieldType(object):
     pass
