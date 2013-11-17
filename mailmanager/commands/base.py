@@ -35,24 +35,31 @@ class BaseCommand(object):
         return open(self._get_configuration_file_path(), mode)
 
     def get_configuration_params(self):
+        import errno
         """Read from the configuration file and return a dict"""
-        with self._get_configuration_file() as configuration:
-            params = {}
-            nline = 0
-            for line in configuration.readlines():
-                nline += 1
-                if line.startswith('#') or line.startswith('\n'):
-                    continue
-                try:
-                    param_name, param_value = line.strip('\r\n').split('=')
-                    params[param_name] = param_value
-                except Exception as e:
-                    print >> sys.stderr, "error at line '%d': '%s' '%s'" % (
-                        nline, line, e
-                    )
-                    sys.exit(1)
+        try:
+            with self._get_configuration_file() as configuration:
+                params = {}
+                nline = 0
+                for line in configuration.readlines():
+                    nline += 1
+                    if line.startswith('#') or line.startswith('\n'):
+                        continue
+                    try:
+                        param_name, param_value = line.strip('\r\n').split('=')
+                        params[param_name] = param_value
+                    except Exception as e:
+                        print >> sys.stderr, "error at line '%d': '%s' '%s'" % (
+                            nline, line, e
+                        )
+                        sys.exit(1)
 
-            return params
+                return params
+        except IOError as e:
+            if e.errno == errno.ENOENT:
+                self.error('Do you have used the \'init\' command to create the config file?')
+            else:
+                raise e
 
     def render_template(self, template_name, params):
         return self.env.get_template(template_name).render(params)
