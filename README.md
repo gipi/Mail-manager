@@ -3,9 +3,9 @@ THIS IS NOT READY FOR PRODUCTION!!! YOUR SERVER WILL BLOW UP!!!
 
 ## INSTALLATION
 
- $ python setup.py install# soon a deb package
- $ mailmanager init --db-user userdb \
-    --db-name maildb --db-passwd dbpasswd
+     $ python setup.py install# soon a deb package
+     $ mailmanager init --db-user userdb \
+        --db-name maildb --db-passwd dbpasswd
 
 this last command save in the .mailmanager/ directory a
 configuration file with the credentials useful to connect
@@ -13,7 +13,7 @@ to the mail database.
 
 It'a also possible to generate the configuration files
 
- # mailmanager conf | tar xf - -C /
+     # mailmanager conf | tar xf - -C /
 
 ## CONFIGURATION
 
