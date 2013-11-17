@@ -15,10 +15,10 @@ It'a also possible to generate the configuration files
 
  # mailmanager conf | tar xf - -C /
 
-## COFIGURATION
+## CONFIGURATION
 
 The configuration file is created with the ``init`` command and
-should contain the following variable
+should contain the following variables
 
     username
     password
